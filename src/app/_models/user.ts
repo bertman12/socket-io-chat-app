@@ -1,5 +1,5 @@
 export interface User {
-    id: number,
+    id?: number,
     username: string,       //profile, message header, navbar
     email: string,          //profile
     bio: string,            //profile

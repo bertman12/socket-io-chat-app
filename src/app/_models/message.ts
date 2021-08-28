@@ -1,5 +1,5 @@
 export interface Message {
-    messageId: number,
+    id?: number,
     userId: number,
     serverId: number,
     roomId: number,
