@@ -29,7 +29,8 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": ["./node_modules/socket.io/client-dist/socket.io.min.js",
+                        "./node_modules/socket.io-client/dist/socket.io.min.js"]
           },
           "configurations": {
             "production": {
