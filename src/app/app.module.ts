@@ -14,6 +14,7 @@ import { ChatRoomComponent } from './chat-room/chat-room.component';
 import { MessageComponent } from './chat-room/message/message.component';
 import { MessageHeaderComponent } from './chat-room/message/message-header/message-header.component';
 import { MessageListComponent } from './chat-room/message-list/message-list.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { MessageListComponent } from './chat-room/message-list/message-list.comp
     ChatRoomComponent,
     MessageComponent,
     MessageHeaderComponent,
-    MessageListComponent
+    MessageListComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
