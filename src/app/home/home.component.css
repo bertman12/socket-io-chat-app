@@ -1,0 +1,21 @@
+.header-area{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-text{
+    margin-top: 2em;
+    margin-bottom: 2em;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+
+.app-feature-cards{
+    display: flex;
+    justify-content: center;
+}
+
+.app-feature-cards-item{
+    margin:0em 0.5em;
+}

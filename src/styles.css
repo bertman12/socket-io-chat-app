@@ -1,1 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+html,body{
+    background-color: #35ff69!important;
+    color:#000000!important;
+    font-family:Georgia, 'Times New Roman', Times, serif!important;
+}
