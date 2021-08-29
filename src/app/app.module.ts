@@ -11,9 +11,9 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { MapComponent } from './map/map.component';
 import { ChatRoomComponent } from './chat-room/chat-room.component';
-import { MessageComponent } from './chat-room/message/message.component';
-import { MessageHeaderComponent } from './chat-room/message/message-header/message-header.component';
+import { MessageComponent } from './chat-room/message-list/message/message.component';
 import { MessageListComponent } from './chat-room/message-list/message-list.component';
+import { MessageHeaderComponent } from './chat-room/message-list/message/message-header/message-header.component';
 import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
@@ -27,9 +27,9 @@ import { FooterComponent } from './footer/footer.component';
     MapComponent,
     ChatRoomComponent,
     MessageComponent,
-    MessageHeaderComponent,
     MessageListComponent,
-    FooterComponent
+    FooterComponent,
+    MessageHeaderComponent
   ],
   imports: [
     BrowserModule,
