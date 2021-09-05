@@ -1,5 +1,8 @@
 nav{
     background-color: #494947;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 a{
@@ -17,3 +20,13 @@ a:focus{
 .dropdown-item{
     color:black;
 }
+
+li{
+    margin: 0.2em 0.2em;
+}
+
+.user-profile-wrapper{
+    display: flex;
+    align-items: flex-end;
+}
+
