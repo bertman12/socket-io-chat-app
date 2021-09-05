@@ -1,1 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+html,body{
+    /* overriding default bootstrap global styles */
+    background-color: #35ff69!important;
+    /* color:#000000!important; */
+    /* font-family:Georgia, 'Times New Roman', Times, serif!important; */
+}

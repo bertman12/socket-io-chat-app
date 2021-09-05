@@ -1,4 +1,4 @@
-export interface World {
+export interface Server {
     //alias for parent room, owner to child rooms
     id?: number,
     name: string,

@@ -1,4 +1,4 @@
-export interface Location {
+export interface Room {
     //alias for child room, owned by parent rooms
     id?: number,
     worldId: number,
