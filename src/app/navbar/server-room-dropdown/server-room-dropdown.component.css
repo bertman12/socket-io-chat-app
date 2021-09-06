@@ -1,0 +1,14 @@
+.wrapper{
+    margin: 0.2em 0.1em;
+}
+.dropdown-button{
+    margin: 0.2em 0.2em;
+    width:20em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dropdown-menu{
+    margin: 2px 2px;
+}

@@ -1,0 +1,32 @@
+nav{
+    background-color: #494947;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+a{
+    color:#35ff69;
+}
+
+a:hover{
+    color:black;
+}
+
+a:focus{
+    color:black;
+}
+
+.dropdown-item{
+    color:black;
+}
+
+li{
+    margin: 0.2em 0.2em;
+}
+
+.user-profile-wrapper{
+    display: flex;
+    align-items: flex-end;
+}
+

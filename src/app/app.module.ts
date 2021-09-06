@@ -15,6 +15,9 @@ import { MessageComponent } from './chat-room/message-list/message/message.compo
 import { MessageListComponent } from './chat-room/message-list/message-list.component';
 import { MessageHeaderComponent } from './chat-room/message-list/message/message-header/message-header.component';
 import { FooterComponent } from './footer/footer.component';
+import { NavbarSettingsComponent } from './navbar/navbar-settings/navbar-settings.component';
+import { NavbarUserComponent } from './navbar/navbar-user/navbar-user.component';
+import { ServerRoomDropdownComponent } from './navbar/server-room-dropdown/server-room-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,10 @@ import { FooterComponent } from './footer/footer.component';
     MessageComponent,
     MessageListComponent,
     FooterComponent,
-    MessageHeaderComponent
+    MessageHeaderComponent,
+    NavbarSettingsComponent,
+    NavbarUserComponent,
+    ServerRoomDropdownComponent
   ],
   imports: [
     BrowserModule,
