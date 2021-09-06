@@ -1,1 +1,11 @@
-<p>server-room-dropdown works!</p>
+
+<div class="dropdown wrapper">
+    <button class="btn btn-dark dropdown-toggle dropdown-button" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        {{ title + ': ' + itemSelected}}
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li *ngFor="let name of locArr">
+            <a class="dropdown-item" (click)="onItemClick(name)">{{ name }}</a>
+        </li>
+    </ul>
+</div>
