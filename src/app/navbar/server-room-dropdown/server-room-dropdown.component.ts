@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ChatArea } from 'src/app/_models/chat-area';
+import { SocketioService } from 'src/app/_services/socketio.service';
 
 @Component({
   selector: 'app-server-room-dropdown',
@@ -7,24 +9,40 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ServerRoomDropdownComponent implements OnInit {
   // type is server or room
-  @Input() dropdownType: string = 'server';
+  @Input() destination: string = 'server';
   
   locArr:string[] = [
     'Test1',
     'Test2',
     'Test3',
-  ]
-  title:string = ''
-  itemSelected: string='';
-  constructor() { }
+  ];
+  title:string = 'No Selection'
+  chatAreaName: any='';
 
-  ngOnInit(): void {
-    if(this.dropdownType === 'server') this.title ="Server";
-    else this.title = "Room"
+  constructor(private socketioService:SocketioService) { }
+
+  ngOnInit(){
+    if(this.destination === 'server') this.title ="Server";
+    else this.title = "Room";
+
+    this.socketioService.chatArea$.subscribe((chatArea: ChatArea) => {
+      if(this.destination === 'server'){ 
+        this.chatAreaName = chatArea.server.id;
+      }
+      else {
+        this.chatAreaName = chatArea.room.id;
+      }
+    })
   }
 
-  onItemClick(name:string){
-    this.itemSelected = name;
+  onRouteClick(name:string, index: number){
+    this.chatAreaName = name;
+    if(this.destination === 'server'){
+      this.socketioService.joinServer(index);
+    }
+    else if(this.destination === 'room'){
+      this.socketioService.joinRoom(index);
+    }
   }
 
 }

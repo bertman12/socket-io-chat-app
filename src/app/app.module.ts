@@ -18,6 +18,7 @@ import { FooterComponent } from './footer/footer.component';
 import { NavbarSettingsComponent } from './navbar/navbar-settings/navbar-settings.component';
 import { NavbarUserComponent } from './navbar/navbar-user/navbar-user.component';
 import { ServerRoomDropdownComponent } from './navbar/server-room-dropdown/server-room-dropdown.component';
+import { RoutingControllerService } from './_services/routing-controller.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,10 @@ import { ServerRoomDropdownComponent } from './navbar/server-room-dropdown/serve
     BrowserModule,
     AppRoutingModule,
   ],
-  providers: [SocketioService],
+  providers: [
+    SocketioService,
+    RoutingControllerService  
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
