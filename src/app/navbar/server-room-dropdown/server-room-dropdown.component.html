@@ -4,9 +4,9 @@
         {{ title + ': ' + (chatAreaName + 1) }}
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li *ngFor="let name of locArr; let index = index">
+        <li *ngFor="let chatArea of localChatAreas">
             <a class="dropdown-item" 
-            (click)="onRouteClick(name, index)">{{ name }}</a>
+            (click)="onRouteClicked(chatArea)">{{ chatArea.name }}</a>
         </li>
     </ul>
 </div>
