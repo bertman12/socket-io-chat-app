@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Message } from 'src/app/_models/message';
 
 @Component({
   selector: 'app-message-header',
@@ -8,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class MessageHeaderComponent implements OnInit {
 
   constructor() { }
+  @Input() currentMessage: Message = {id:0 ,userId: 0, serverId: 0, roomId: 0, content: 'MESSAGE NOT RECEIVED'};
 
   ngOnInit(): void {
   }

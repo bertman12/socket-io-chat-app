@@ -54,6 +54,10 @@ export class SocketioService {
 
   }
 
+  getChatArea(){
+    return this.currentChatArea;
+  }
+  
 }
 
 

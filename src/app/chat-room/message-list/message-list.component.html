@@ -1,1 +1,4 @@
-<p>message-list works!</p>
+<div style="border: 5px gray ridge;">
+    <p>IM A MESSAGE CONTAINER FOR ALL MESSAGES</p>
+    <app-message *ngFor="let message of localMessages" [currentMessage]="message"></app-message>
+</div>

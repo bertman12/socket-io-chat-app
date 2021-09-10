@@ -19,6 +19,8 @@ import { NavbarSettingsComponent } from './navbar/navbar-settings/navbar-setting
 import { NavbarUserComponent } from './navbar/navbar-user/navbar-user.component';
 import { ServerRoomDropdownComponent } from './navbar/server-room-dropdown/server-room-dropdown.component';
 import { RoutingControllerService } from './_services/routing-controller.service';
+import { UserService } from './_services/user.service';
+import { MessageService } from './_services/message.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { RoutingControllerService } from './_services/routing-controller.service
   ],
   providers: [
     SocketioService,
-    RoutingControllerService  
+    RoutingControllerService,
+    UserService,
+    MessageService  
   ],
   bootstrap: [AppComponent]
 })

@@ -11,11 +11,13 @@ export class ServerRoomDropdownComponent implements OnInit {
   // type is server or room
   @Input() destination: string = 'server';
   
+  //The local array should get the info of servers or rooms from the database
   locArr:string[] = [
     'Test1',
     'Test2',
     'Test3',
   ];
+  
   title:string = 'No Selection'
   chatAreaName: any='';
 
