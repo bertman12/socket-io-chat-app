@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 import { ChatArea } from '../_models/chatArea';
@@ -34,9 +34,13 @@ export class SocketioService {
       server:{id:2, name: 'Server', image: '' }, 
       room: {id: 0, name: 'Room', serverId: 2, image: ''}
     },
+    {
+      server:{id:3, name: 'Server', image: '' }, 
+      room: {id: 1, name: 'Room', serverId: 3, image: ''}
+    },
   ]
 
-  constructor(private route: ActivatedRoute, private router: Router) {
+  constructor(private router: Router) {
   }
 
   establishConnection(){
@@ -51,6 +55,16 @@ export class SocketioService {
     this.socket.emit('myEvent', msg);
   }
 
+  getRooms():ChatRoom[] {
+    const locArr:ChatRoom[] = [];
+    this.chatAreas.forEach( (chatArea:ChatArea) => {
+      if (this.currentServer.id === chatArea.room.serverId){
+        locArr.push(chatArea.room);
+      }
+    });
+    return locArr;
+  }
+
   joinRoom(roomId: number){
     this.currentRoom.id = roomId;
     this.chatAreaUpdated$.next(this.currentChatArea);
@@ -59,6 +73,14 @@ export class SocketioService {
 
   leaveRoom(){
 
+  }
+
+  getServers():ChatServer[] {
+    const locArr:ChatServer[] = [];
+    this.chatAreas.forEach((chatArea: ChatArea) => {
+      locArr.push(chatArea.server);
+    });
+    return locArr;
   }
 
   joinServer(serverId: number){

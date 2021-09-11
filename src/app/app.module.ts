@@ -21,6 +21,8 @@ import { ServerRoomDropdownComponent } from './navbar/server-room-dropdown/serve
 import { RoutingControllerService } from './_services/routing-controller.service';
 import { UserService } from './_services/user.service';
 import { MessageService } from './_services/message.service';
+import { RoomService } from './_services/room.service';
+import { ServerService } from './_services/server.service';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { MessageService } from './_services/message.service';
     SocketioService,
     RoutingControllerService,
     UserService,
-    MessageService  
+    MessageService,
+    RoomService,
+    ServerService  
   ],
   bootstrap: [AppComponent]
 })

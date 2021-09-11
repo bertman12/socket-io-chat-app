@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ChatArea } from 'src/app/_models/chatArea';
+import { ChatRoom } from 'src/app/_models/chatRoom';
+import { ChatServer } from 'src/app/_models/chatServer';
 import { SocketioService } from 'src/app/_services/socketio.service';
 
 @Component({
@@ -9,50 +11,42 @@ import { SocketioService } from 'src/app/_services/socketio.service';
 })
 export class ServerRoomDropdownComponent implements OnInit {
   // type is server or room
-  @Input() destination: string = 'server';
+  @Input() listType: string = 'server';
   
   //The local array should get the info of servers or rooms from the database
-  localChatAreas: any[] = [];
+  listItemsArr: ChatRoom[] | ChatServer[] = [];
   
-  title:string = 'No Selection'
-  chatAreaName: any='';
+  dropdownLabel:string = 'No Selection'
+  listItemId: number = 0;
 
   constructor(private socketioService:SocketioService) { }
   //make component get chat areas from socketio service to populate the dropdown items
   ngOnInit(){
-    if(this.destination === 'server'){ 
-      this.title ="Server"
-    this.socketioService.getChatAreas().forEach( (chatArea:ChatArea) => {
-      this.localChatAreas.push(chatArea.server);
-    });
+    if(this.listType === 'server'){ 
+      this.dropdownLabel ="Server"
+      this.listItemsArr = this.socketioService.getServers();
     }
     else {
-      this.title = "Room"
-      this.socketioService.getChatAreas().forEach( (chatArea:ChatArea) => {
-        if (this.socketioService.currentServer.id === chatArea.room.serverId){
-          this.localChatAreas.push(chatArea.room);
-        }
-      });
+      this.dropdownLabel = "Room"
+      this.listItemsArr = this.socketioService.getRooms();
     };
-    // this.localChatAreas = this.socketioService.getChatAreas();
     this.socketioService.chatAreaUpdated$.subscribe((chatArea: ChatArea) => {
-      if(this.destination === 'server'){ 
-        this.chatAreaName = chatArea.server.id;
+      if(this.listType === 'server'){ 
+        this.listItemId = chatArea.server.id;
       }
       else {
-        this.chatAreaName = chatArea.room.id;
+        this.listItemId = chatArea.room.id;
       }
     });
   }
 
-  onRouteClicked(chatArea: any){
-    console.log('this is the chat area clicked', chatArea);
-    this.chatAreaName = chatArea.name;
-    if(this.destination === 'server'){
-      this.socketioService.joinServer(chatArea.id);
+  onItemClicked(item: ChatServer | ChatRoom){
+    this.listItemId = item.id;
+    if(this.listType === 'server'){
+      this.socketioService.joinServer(item.id);
     }
-    else if(this.destination === 'room'){
-      this.socketioService.joinRoom(chatArea.id);
+    else if(this.listType === 'room'){
+      this.socketioService.joinRoom(item.id);
     }
   }
 

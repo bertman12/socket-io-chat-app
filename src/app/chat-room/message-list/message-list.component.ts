@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Message } from 'src/app/_models/message';
 import { MessageService } from 'src/app/_services/message.service';
+import { ServerService } from 'src/app/_services/server.service';
 import { SocketioService } from 'src/app/_services/socketio.service';
 
 @Component({
@@ -10,16 +11,22 @@ import { SocketioService } from 'src/app/_services/socketio.service';
 })
 export class MessageListComponent implements OnInit {
 
-  constructor(private messageService: MessageService, private socketioService: SocketioService) { }
+  constructor(private serverService: ServerService) { }
   localMessages: Message[] = [];
   ngOnInit(): void {
-    this.socketioService.chatAreaUpdated$.subscribe((chatArea)=>{
-      this.messageService.getAllMessages(chatArea);
-    });
-    this.messageService.chatAreaMessages$.subscribe((messages: Message[]) => {
-      this.localMessages = messages;
-    });
-    // this.socketioService.getChatArea();
-    this.messageService.getAllMessages(this.socketioService.getChatArea());
+    this.serverService.serverChanged$.subscribe(() => {
+      this.localMessages = this.serverService.roomMessages;
+    })
+    this.localMessages = this.serverService.roomMessages;
+
+    // this.socketioService.chatAreaUpdated$.subscribe((chatArea)=>{
+    //   this.messageService.getAllMessages(chatArea);
+    // });
+
+    // this.messageService.roomMessages$.subscribe((messages: Message[]) => {
+    //   this.localMessages = messages;
+    // });
+
+    // this.messageService.getAllMessages(this.socketioService.getChatArea());
   }
 }
