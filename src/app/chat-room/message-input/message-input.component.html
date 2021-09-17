@@ -1,0 +1,6 @@
+<div class="btn-group col-12">
+    <input  class="btn btn-light message-input" type="text" placeholder="Say something..." #messageInput>
+    <div>
+        <button class="btn btn-primary" (click)="onMessageEntered(messageInput.value)">Submit</button>
+    </div>
+</div>

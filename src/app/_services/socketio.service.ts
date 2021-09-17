@@ -55,52 +55,52 @@ export class SocketioService {
     this.socket.emit('myEvent', msg);
   }
 
-  getRooms():ChatRoom[] {
-    const locArr:ChatRoom[] = [];
-    this.chatAreas.forEach( (chatArea:ChatArea) => {
-      if (this.currentServer.id === chatArea.room.serverId){
-        locArr.push(chatArea.room);
-      }
-    });
-    return locArr;
-  }
+  // getRooms():ChatRoom[] {
+  //   const locArr:ChatRoom[] = [];
+  //   this.chatAreas.forEach( (chatArea:ChatArea) => {
+  //     if (this.currentServer.id === chatArea.room.serverId){
+  //       locArr.push(chatArea.room);
+  //     }
+  //   });
+  //   return locArr;
+  // }
 
-  joinRoom(roomId: number){
-    this.currentRoom.id = roomId;
-    this.chatAreaUpdated$.next(this.currentChatArea);
-    this.router.navigate(['chat-room', this.currentServer.id  , this.currentRoom.id ]);
-  }
+  // joinRoom(roomId: number){
+  //   this.currentRoom.id = roomId;
+  //   this.chatAreaUpdated$.next(this.currentChatArea);
+  //   this.router.navigate(['chat-room', this.currentServer.id  , this.currentRoom.id ]);
+  // }
 
-  leaveRoom(){
+  // leaveRoom(){
 
-  }
+  // }
 
-  getServers():ChatServer[] {
-    const locArr:ChatServer[] = [];
-    this.chatAreas.forEach((chatArea: ChatArea) => {
-      locArr.push(chatArea.server);
-    });
-    return locArr;
-  }
+  // getServers():ChatServer[] {
+  //   const locArr:ChatServer[] = [];
+  //   this.chatAreas.forEach((chatArea: ChatArea) => {
+  //     locArr.push(chatArea.server);
+  //   });
+  //   return locArr;
+  // }
 
-  joinServer(serverId: number){
-    this.currentServer.id = serverId;
-    this.currentRoom.id = this.DEFAULT_ROOM_NUMBER;
-    this.chatAreaUpdated$.next(this.currentChatArea);
-    this.router.navigate(['chat-room', this.currentServer.id, this.currentRoom.id ]);
-  }
+  // joinServer(serverId: number){
+  //   this.currentServer.id = serverId;
+  //   this.currentRoom.id = this.DEFAULT_ROOM_NUMBER;
+  //   this.chatAreaUpdated$.next(this.currentChatArea);
+  //   this.router.navigate(['chat-room', this.currentServer.id, this.currentRoom.id ]);
+  // }
 
-  leaveServer(){
+  // leaveServer(){
 
-  }
+  // }
 
-  getChatArea(){
-    return this.currentChatArea;
-  }
+  // getChatArea(){
+  //   return this.currentChatArea;
+  // }
 
-  getChatAreas(){
-    return this.chatAreas.slice();
-  }
+  // getChatAreas(){
+  //   return this.chatAreas.slice();
+  // }
   
 }
 

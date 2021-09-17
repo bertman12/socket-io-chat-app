@@ -23,6 +23,7 @@ import { UserService } from './_services/user.service';
 import { MessageService } from './_services/message.service';
 import { RoomService } from './_services/room.service';
 import { ServerService } from './_services/server.service';
+import { MessageInputComponent } from './chat-room/message-input/message-input.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ServerService } from './_services/server.service';
     MessageHeaderComponent,
     NavbarSettingsComponent,
     NavbarUserComponent,
-    ServerRoomDropdownComponent
+    ServerRoomDropdownComponent,
+    MessageInputComponent
   ],
   imports: [
     BrowserModule,
