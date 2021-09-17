@@ -11,8 +11,11 @@ export class MessageService {
 
   roomMessages$: Subject<Message[]> = new Subject();
   messages: Message[] = [
-    {id:0 ,userId: 0, serverId: 0, roomId: 0, content: 'Im the message content'}
-  ]
+    {id:0 ,userId: 0, serverId: 0, roomId: 0, content: 'Im the message content'},
+    {id:0 ,userId: 0, serverId: 1, roomId: 0, content: 'Im the message content'},
+    {id:0 ,userId: 0, serverId: 2, roomId: 0, content: 'Im the message content'},
+    {id:0 ,userId: 0, serverId: 2, roomId: 1, content: 'Im the message content'},
+  ];
 
   createMessage(){
 

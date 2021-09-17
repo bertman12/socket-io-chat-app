@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ChatArea } from 'src/app/_models/chatArea';
 import { ChatRoom } from 'src/app/_models/chatRoom';
 import { ChatServer } from 'src/app/_models/chatServer';
+import { RoomService } from 'src/app/_services/room.service';
+import { ServerService } from 'src/app/_services/server.service';
 import { SocketioService } from 'src/app/_services/socketio.service';
 
 @Component({
@@ -17,36 +19,37 @@ export class ServerRoomDropdownComponent implements OnInit {
   listItemsArr: ChatRoom[] | ChatServer[] = [];
   
   dropdownLabel:string = 'No Selection'
-  listItemId: number = 0;
+  selectedItemId: number = 0;
 
-  constructor(private socketioService:SocketioService) { }
-  //make component get chat areas from socketio service to populate the dropdown items
+  constructor(private serverService: ServerService, private roomService:RoomService) { }
   ngOnInit(){
     if(this.listType === 'server'){ 
       this.dropdownLabel ="Server"
-      this.listItemsArr = this.socketioService.getServers();
+      this.listItemsArr = this.serverService.servers;
     }
     else {
       this.dropdownLabel = "Room"
-      this.listItemsArr = this.socketioService.getRooms();
-    };
-    this.socketioService.chatAreaUpdated$.subscribe((chatArea: ChatArea) => {
+      this.listItemsArr = this.serverService.rooms;
+    }
+    this.serverService.serverChanged$.subscribe((selectedServer: ChatServer) => {
+      //update the dropdown list to show the correct rooms when a new server is selected
       if(this.listType === 'server'){ 
-        this.listItemId = chatArea.server.id;
+        this.selectedItemId = selectedServer.id;
       }
       else {
-        this.listItemId = chatArea.room.id;
+        this.selectedItemId = this.roomService.currentRoom.id;
+        this.listItemsArr = this.serverService.rooms;
       }
     });
   }
 
-  onItemClicked(item: ChatServer | ChatRoom){
-    this.listItemId = item.id;
+  onItemClicked(item: any){
+    this.selectedItemId = item.id;
     if(this.listType === 'server'){
-      this.socketioService.joinServer(item.id);
+      this.serverService.joinServer(item);
     }
     else if(this.listType === 'room'){
-      this.socketioService.joinRoom(item.id);
+      this.roomService.joinRoom(item.id, this.serverService.currentServer.id);
     }
   }
 

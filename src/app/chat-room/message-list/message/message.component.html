@@ -1,5 +1,5 @@
 <div style="border: 5px gray ridge;">
     <app-message-header [currentMessage]="currentMessage"></app-message-header>
     <p>message works!</p>
-    <p>CONTENT: {{ currentMessage.content }}</p>
+    <p>CONTENT: {{ (currentMessage.content + ' for Server: ' +  currentMessage.serverId + ' Room: ' + currentMessage.roomId)  }}</p>
 </div>

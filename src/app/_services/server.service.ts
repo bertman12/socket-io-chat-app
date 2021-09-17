@@ -18,26 +18,21 @@ export class ServerService {
     {id:2, name: 'Server', image: '' },
   ];
 
-  serverChanged$ = new Subject<number>()
-  currentServerId:number = 0; 
-  
+  serverChanged$ = new Subject<ChatServer>()
+  currentServer:ChatServer = {id:0, name: 'Server', image: '' }; 
 
   get rooms():ChatRoom[]{
-    return this.roomService.getRooms(this.currentServerId);
-  }
-
-  get roomMessages():Message[]{
-    return this.roomService.messages;
+    return this.roomService.getRooms(this.currentServer.id);
   }
 
   get servers():ChatServer[] {
     return this.serverList.slice();
   }
 
-  joinServer(selectedServerId: number){
-    this.currentServerId = selectedServerId;
-    this.roomService.room = 0;
-    // this.chatAreaUpdated$.next(this.currentChatArea);
-    this.router.navigate(['chat-room', this.currentServerId, this.roomService.currentRoom.id ]);
+  joinServer(selectedServer: ChatServer){
+    const DEFAULT_ROOM:number = 0
+    this.currentServer = selectedServer;
+    this.serverChanged$.next(this.currentServer);
+    this.roomService.joinRoom(DEFAULT_ROOM, selectedServer.id);
   }
 }
