@@ -32,7 +32,7 @@ export class ServerService {
   joinServer(selectedServer: ChatServer){
     const DEFAULT_ROOM:number = 0
     this.currentServer = selectedServer;
-    this.serverChanged$.next(this.currentServer);
     this.roomService.joinRoom(DEFAULT_ROOM, selectedServer.id);
+    this.serverChanged$.next(this.currentServer);
   }
 }

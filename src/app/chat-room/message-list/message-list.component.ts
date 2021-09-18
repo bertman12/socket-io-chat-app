@@ -12,14 +12,17 @@ import { RoomService } from 'src/app/_services/room.service';
 export class MessageListComponent implements OnInit {
 
   constructor(private roomService: RoomService, private messageService: MessageService) { }
+
   localMessages: Message[] = [];
+
   ngOnInit(): void {
     this.localMessages = this.roomService.messages;
-    this.roomService.roomChanged$.subscribe((room: ChatRoom) => {
+    this.roomService.roomChanged$.subscribe(() => {
       this.localMessages = this.roomService.messages;
     });
-    this.messageService.messageListChanged$.subscribe((newMessageList: Message[]) => {
-      this.localMessages = newMessageList;
-    })
+    this.messageService.messageListChanged$.subscribe(() => {
+      this.localMessages = this.roomService.messages;
+      console.log('hello');
+    });
   }
 }
