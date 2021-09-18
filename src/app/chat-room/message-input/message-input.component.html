@@ -1,6 +1,6 @@
 <div class="btn-group col-12">
-    <input  class="btn btn-light message-input" type="text" placeholder="Say something..." #messageInput>
+    <input  class="btn btn-light message-input" type="text" placeholder="Say something..." [(ngModel)]="messageInput">
     <div>
-        <button class="btn btn-primary" (click)="onMessageEntered(messageInput.value)">Submit</button>
+        <button class="btn btn-primary" (click)="onMessageEntered()">Submit</button>
     </div>
 </div>

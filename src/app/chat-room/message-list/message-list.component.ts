@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ChatRoom } from 'src/app/_models/chatRoom';
 import { Message } from 'src/app/_models/message';
 import { MessageService } from 'src/app/_services/message.service';
 import { RoomService } from 'src/app/_services/room.service';

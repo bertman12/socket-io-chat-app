@@ -44,7 +44,7 @@ export class RoomService {
   }
 
   joinRoom(selectedRoomId: number, selectedRoomServerId?: number){
-    console.log('RoomServerId:', selectedRoomServerId, ' RoomID ', selectedRoomId);
+    // console.log('RoomServerId:', selectedRoomServerId, ' RoomID ', selectedRoomId);
     this.rooms.forEach((room: ChatRoom) => {
       if((room.serverId === selectedRoomServerId) && (room.id === selectedRoomId)){
         this.currentRoom = room;
@@ -54,7 +54,7 @@ export class RoomService {
       }
       else {
         //this.router.navigate(['404']); //room does not exist
-        console.error('Room does not exist!');
+        // console.error('Room does not exist!');
       }
     });
   }

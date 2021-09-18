@@ -1,4 +1,7 @@
-<div style="border: 5px gray ridge;">
-    <p>IM A MESSAGE CONTAINER FOR ALL MESSAGES</p>
-    <app-message *ngFor="let message of localMessages" [currentMessage]="message"></app-message>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <app-message *ngFor="let message of localMessages" [currentMessage]="message"></app-message>
+        </div>
+    </div>
 </div>
