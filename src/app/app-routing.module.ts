@@ -7,8 +7,8 @@ import { ServerRoomDropdownComponent } from './navbar/server-room-dropdown/serve
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'navbar', component: NavbarComponent},
-  {path: 'navbar/dropdown', component: ServerRoomDropdownComponent},
+  // {path: 'navbar', component: NavbarComponent},
+  // {path: 'navbar/dropdown', component: ServerRoomDropdownComponent},
   {path: 'chat-room/:server/:room', component: ChatRoomComponent}, 
 
   {path:"**", redirectTo: '', pathMatch: 'full'}

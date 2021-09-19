@@ -23,9 +23,10 @@ export class MessageService {
     const TEMP_USER_ID: number = 0;
     const NEW_MESSAGE = {id: messageId, userId: TEMP_USER_ID, serverId: serverId, roomId: roomId, content: message};
     this.messages.push(NEW_MESSAGE);
-    console.log('The current new message...',{id: messageId, userId: TEMP_USER_ID, serverId: serverId, roomId: roomId, content: message});
-    console.log('The current list of messages...',this.messages);
+    // console.log('The current new message...',{id: messageId, userId: TEMP_USER_ID, serverId: serverId, roomId: roomId, content: message});
+    // console.log('The current list of messages...',this.messages);
     this.messageListChanged$.next(NEW_MESSAGE);
+    
     // this.getAllMessages(serverId, roomId);
   }
 
