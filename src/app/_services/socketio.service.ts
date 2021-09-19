@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
-import { ChatArea } from '../_models/chatArea';
-import { ChatRoom } from '../_models/chatRoom';
-import { ChatServer } from '../_models/chatServer';
 import { API_URL } from 'src/environments/environment';
 
 @Injectable({
@@ -13,35 +8,34 @@ import { API_URL } from 'src/environments/environment';
 
 export class SocketioService {
   
-  private readonly DEFAULT_ROOM_NUMBER: number = 0;
+  // private readonly DEFAULT_ROOM_NUMBER: number = 0;
   
   socket!: Socket;
-  currentServer:ChatServer = {id:0, name: 'Server', image: '' };
-  currentRoom:ChatRoom = {id: 0, name: 'Room', serverId: 0, image: ''};
-  currentChatArea: ChatArea = {server: this.currentServer, room: this.currentRoom};
-  chatAreaUpdated$:Subject<ChatArea> = new Subject();
+  // currentServer:ChatServer = {id:0, name: 'Server', image: '' };
+  // currentRoom:ChatRoom = {id: 0, name: 'Room', serverId: 0, image: ''};
+  // currentChatArea: ChatArea = {server: this.currentServer, room: this.currentRoom};
+  // chatAreaUpdated$:Subject<ChatArea> = new Subject();
   
-  chatAreas: ChatArea[] = [
-    {
-      server:{id:0, name: 'Server', image: '' }, 
-      room: {id: 0, name: 'Room', serverId: 0, image: ''}
-    },
-    {
-      server:{id:1, name: 'Server', image: '' }, 
-      room: {id: 0, name: 'Room', serverId: 1, image: ''}
-    },
-    {
-      server:{id:2, name: 'Server', image: '' }, 
-      room: {id: 0, name: 'Room', serverId: 2, image: ''}
-    },
-    {
-      server:{id:3, name: 'Server', image: '' }, 
-      room: {id: 1, name: 'Room', serverId: 3, image: ''}
-    },
-  ]
+  // chatAreas: ChatArea[] = [
+  //   {
+  //     server:{id:0, name: 'Server', image: '' }, 
+  //     room: {id: 0, name: 'Room', serverId: 0, image: ''}
+  //   },
+  //   {
+  //     server:{id:1, name: 'Server', image: '' }, 
+  //     room: {id: 0, name: 'Room', serverId: 1, image: ''}
+  //   },
+  //   {
+  //     server:{id:2, name: 'Server', image: '' }, 
+  //     room: {id: 0, name: 'Room', serverId: 2, image: ''}
+  //   },
+  //   {
+  //     server:{id:3, name: 'Server', image: '' }, 
+  //     room: {id: 1, name: 'Room', serverId: 3, image: ''}
+  //   },
+  // ]
 
-  constructor(private router: Router) {
-  }
+  constructor() {}
 
   establishConnection(){
     this.socket = io(API_URL);

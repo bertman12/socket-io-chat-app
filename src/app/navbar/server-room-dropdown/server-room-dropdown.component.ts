@@ -49,8 +49,7 @@ export class ServerRoomDropdownComponent implements OnInit {
       this.serverService.joinServer(item);
     }
     else if(this.listType === 'room'){
-      this.roomService.joinRoom(item.id, this.serverService.currentServer.id);
+      this.roomService.joinRoom(item.id, this.serverService.currentServer.id, 'dropdown component');
     }
   }
-
 }

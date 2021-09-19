@@ -25,12 +25,19 @@ export class RoomService {
     {id: 3, name: 'Room', serverId: 2, image: ''},
     {id: 4, name: 'Room', serverId: 2, image: ''},
   ];
-
   currentRoom: ChatRoom = {id: 0, name: 'Room', serverId: 0, image: ''};
   roomChanged$ = new Subject<ChatRoom>();
 
   get messages() {
-    return this.messageService.getAllMessages(this.currentRoom.serverId, this.currentRoom.id);
+    let messages:Message[] = [];
+    messages = this.messageService.getRoomMessages(this.currentRoom.serverId, this.currentRoom.id);
+    if(messages.length > 0){
+      return messages;
+    }
+    else if(messages.length === 0){
+      return [{id:-1 ,userId: 0, serverId: this.currentRoom.serverId, roomId: this.currentRoom.id, content: 'No messages for the current room.'}];
+    }
+    return [{id:0 ,userId: 0, serverId: this.currentRoom.serverId, roomId: this.currentRoom.id, content: 'Unable to generate any messages from get messages.'}];
   }
 
   getRooms(currentServerId: number):ChatRoom[] {
@@ -43,20 +50,21 @@ export class RoomService {
     return locArr;
   }
 
-  joinRoom(selectedRoomId: number, selectedRoomServerId?: number){
-    // console.log('RoomServerId:', selectedRoomServerId, ' RoomID ', selectedRoomId);
-    this.rooms.forEach((room: ChatRoom) => {
+  joinRoom(selectedRoomId: number, selectedRoomServerId?: number, caller?:string){
+    for(let room of this.rooms){
       if((room.serverId === selectedRoomServerId) && (room.id === selectedRoomId)){
         this.currentRoom = room;
         this.roomChanged$.next(this.currentRoom);
-        this.messageService.getAllMessages(this.currentRoom.id, this.currentRoom.serverId);
+        this.messageService.getRoomMessages(this.currentRoom.id, this.currentRoom.serverId);
         this.router.navigate(['chat-room', this.currentRoom.serverId  , this.currentRoom.id ]);
+        console.log('joined room sucessfully', 'The function caller is ', caller);
+        return
       }
       else {
+        console.log('room didn\'t exist', 'The function caller is ', caller);
         //this.router.navigate(['404']); //room does not exist
-        // console.error('Room does not exist!');
       }
-    });
+    }
   }
 
   leaveRoom(){

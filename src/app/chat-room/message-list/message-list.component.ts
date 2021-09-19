@@ -8,6 +8,7 @@ import { RoomService } from 'src/app/_services/room.service';
   templateUrl: './message-list.component.html',
   styleUrls: ['./message-list.component.css']
 })
+
 export class MessageListComponent implements OnInit {
 
   constructor(private roomService: RoomService, private messageService: MessageService) { }
@@ -16,12 +17,12 @@ export class MessageListComponent implements OnInit {
 
   ngOnInit(): void {
     this.localMessages = this.roomService.messages;
+
     this.roomService.roomChanged$.subscribe(() => {
       this.localMessages = this.roomService.messages;
     });
     this.messageService.messageListChanged$.subscribe(() => {
       this.localMessages = this.roomService.messages;
-      console.log('hello');
     });
   }
 }

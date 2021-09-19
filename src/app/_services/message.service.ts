@@ -10,6 +10,7 @@ export class MessageService {
   constructor() {}
 
   messageListChanged$: Subject<Message[] | Message> = new Subject();
+
   messages: Message[] = [
     {id:0 ,userId: 0, serverId: 0, roomId: 0, content: 'Im the message content'},
     {id:0 ,userId: 0, serverId: 1, roomId: 0, content: 'Im the message content'},
@@ -32,7 +33,7 @@ export class MessageService {
 
   }
 
-  getAllMessages(serverId:number, roomId: number){
+  getRoomMessages(serverId:number, roomId: number){
     const arr: Message[] = [];
     this.messages.forEach((message: Message) => {
       if((message.serverId === serverId ) && (message.roomId === roomId )){
@@ -40,7 +41,6 @@ export class MessageService {
       }
     });
     //in the backend I find messages that match the server and room id and return that list
-    // console.log('message list changed!');
     // this.messageListChanged$.next(arr); WHY DID I SAY MESSAGE LIST CHANGED WHEN I GET ROOMS LOL,  IT DOESN'T PROBLEM FIXED
     return arr;
   }
@@ -49,7 +49,12 @@ export class MessageService {
 
   }
 
-  deleteMessage(){
-
+  deleteMessage(messageSelected: Message){
+    this.messages.forEach(
+      (msg, index) =>{
+        if(messageSelected === msg){
+          this.messages.splice(index, 1);
+        }
+    });
   }
 }
