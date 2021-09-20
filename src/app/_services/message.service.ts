@@ -7,10 +7,13 @@ import { Message } from '../_models/message';
 })
 export class MessageService {
 
-  constructor() {}
+  constructor() {
+  }
 
   messageListChanged$: Subject<Message[] | Message> = new Subject();
-
+  messageEditId$: Subject<number> = new Subject();
+  private DEFAULT_EDIT_ID:number = -1;
+  
   messages: Message[] = [
     {id:0 ,userId: 0, serverId: 0, roomId: 0, content: 'Im the message content'},
     {id:0 ,userId: 0, serverId: 1, roomId: 0, content: 'Im the message content'},
@@ -19,15 +22,12 @@ export class MessageService {
   ];
 
   createMessage(serverId: number, roomId: number, messageId:number, message: string){
-    //get data about current server, room and user
+    const date = new Date();
+    const messageTime:string = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}, ${date.getHours()}:${date.getMinutes()}`
     const TEMP_USER_ID: number = 0;
-    const NEW_MESSAGE = {id: messageId, userId: TEMP_USER_ID, serverId: serverId, roomId: roomId, content: message};
+    const NEW_MESSAGE = {id: messageId, userId: TEMP_USER_ID, serverId: serverId, roomId: roomId, content: message, time: messageTime};
     this.messages.push(NEW_MESSAGE);
-    // console.log('The current new message...',{id: messageId, userId: TEMP_USER_ID, serverId: serverId, roomId: roomId, content: message});
-    // console.log('The current list of messages...',this.messages);
     this.messageListChanged$.next(NEW_MESSAGE);
-    
-    // this.getAllMessages(serverId, roomId);
   }
 
   getMessage(){
@@ -41,21 +41,35 @@ export class MessageService {
         arr.push(message);
       }
     });
-    //in the backend I find messages that match the server and room id and return that list
-    // this.messageListChanged$.next(arr); WHY DID I SAY MESSAGE LIST CHANGED WHEN I GET ROOMS LOL,  IT DOESN'T PROBLEM FIXED
     return arr;
   }
 
-  editMessage(){
+  onEditMessage(messageId: number){
+    if(messageId >= 0){
+      this.messageEditId$.next(messageId);
+    }
+  }
 
+  editMessage(messageSelected: Message){
+    this.messages.forEach(
+      (msg) =>{
+        if(messageSelected === msg){
+          msg.content = messageSelected.content;
+          this.messageEditId$.next(this.DEFAULT_EDIT_ID);
+          this.messageListChanged$.next();
+        }
+    });
   }
 
   deleteMessage(messageSelected: Message){
-    this.messages.forEach(
-      (msg, index) =>{
-        if(messageSelected === msg){
-          this.messages.splice(index, 1);
-        }
-    });
+    if(messageSelected.id >= 0){
+      this.messages.forEach(
+        (msg, index) =>{
+          if(messageSelected === msg){
+            this.messages.splice(index, 1);
+            this.messageListChanged$.next();
+          }
+      });
+    }
   }
 }

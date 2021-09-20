@@ -17,6 +17,7 @@ export class ServerService {
     {id:1, name: 'Server', image: '' },
     {id:2, name: 'Server', image: '' },
   ];
+  
   serverChanged$ = new Subject<ChatServer>()
   currentServer:ChatServer = {id:0, name: 'Server', image: '' }; 
 

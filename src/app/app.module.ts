@@ -18,12 +18,13 @@ import { FooterComponent } from './footer/footer.component';
 import { NavbarSettingsComponent } from './navbar/navbar-settings/navbar-settings.component';
 import { NavbarUserComponent } from './navbar/navbar-user/navbar-user.component';
 import { ServerRoomDropdownComponent } from './navbar/server-room-dropdown/server-room-dropdown.component';
-import { RoutingControllerService } from './_services/routing-controller.service';
 import { UserService } from './_services/user.service';
 import { MessageService } from './_services/message.service';
 import { RoomService } from './_services/room.service';
 import { ServerService } from './_services/server.service';
 import { MessageInputComponent } from './chat-room/message-input/message-input.component';
+import { MessageOptionsComponent } from './chat-room/message-list/message/message-header/message-options/message-options.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -42,16 +43,17 @@ import { MessageInputComponent } from './chat-room/message-input/message-input.c
     NavbarSettingsComponent,
     NavbarUserComponent,
     ServerRoomDropdownComponent,
-    MessageInputComponent
+    MessageInputComponent,
+    MessageOptionsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [
     SocketioService,
-    RoutingControllerService,
     UserService,
     MessageService,
     RoomService,

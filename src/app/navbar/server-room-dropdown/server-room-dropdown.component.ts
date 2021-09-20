@@ -22,6 +22,8 @@ export class ServerRoomDropdownComponent implements OnInit {
   selectedItemId: number = 0;
 
   constructor(private serverService: ServerService, private roomService:RoomService) { }
+
+
   ngOnInit(){
     if(this.listType === 'server'){ 
       this.dropdownLabel ="Server"
@@ -52,4 +54,9 @@ export class ServerRoomDropdownComponent implements OnInit {
       this.roomService.joinRoom(item.id, this.serverService.currentServer.id, 'dropdown component');
     }
   }
+
+  onAddItem(){
+
+  }
+
 }

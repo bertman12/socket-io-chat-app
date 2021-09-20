@@ -25,6 +25,7 @@ export class RoomService {
     {id: 3, name: 'Room', serverId: 2, image: ''},
     {id: 4, name: 'Room', serverId: 2, image: ''},
   ];
+
   currentRoom: ChatRoom = {id: 0, name: 'Room', serverId: 0, image: ''};
   roomChanged$ = new Subject<ChatRoom>();
 
@@ -35,7 +36,7 @@ export class RoomService {
       return messages;
     }
     else if(messages.length === 0){
-      return [{id:-1 ,userId: 0, serverId: this.currentRoom.serverId, roomId: this.currentRoom.id, content: 'No messages for the current room.'}];
+      return [{id:-2 ,userId: 0, serverId: this.currentRoom.serverId, roomId: this.currentRoom.id, content: 'No messages for the current room.'}];
     }
     return [{id:0 ,userId: 0, serverId: this.currentRoom.serverId, roomId: this.currentRoom.id, content: 'Unable to generate any messages from get messages.'}];
   }
@@ -57,12 +58,11 @@ export class RoomService {
         this.roomChanged$.next(this.currentRoom);
         this.messageService.getRoomMessages(this.currentRoom.id, this.currentRoom.serverId);
         this.router.navigate(['chat-room', this.currentRoom.serverId  , this.currentRoom.id ]);
-        console.log('joined room sucessfully', 'The function caller is ', caller);
+        // console.log('joined room sucessfully', 'The function caller is ', caller);
         return
       }
       else {
-        console.log('room didn\'t exist', 'The function caller is ', caller);
-        //this.router.navigate(['404']); //room does not exist
+        // console.log('room didn\'t exist', 'The function caller is ', caller);
       }
     }
   }

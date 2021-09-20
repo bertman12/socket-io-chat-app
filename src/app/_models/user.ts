@@ -5,8 +5,8 @@ export interface User {
     bio: string,            //profile
     avatarImage: string,    //profile, message header, navbar; src string
     role: number,           //authorization
-    location: number,       //current room   (child of parent room)
-    world: number,          //current server (parent room)
+    room: number,           //current room   (child of room room)
+    server: number,          //current server (parent server)
 //  friends: number[]. Will be implemented as a table utilizing foreign key for association
 //  messages: number[]. Will be implemented as a table utilizing foreign key for association
 }

@@ -17,7 +17,6 @@ export class MessageListComponent implements OnInit {
 
   ngOnInit(): void {
     this.localMessages = this.roomService.messages;
-
     this.roomService.roomChanged$.subscribe(() => {
       this.localMessages = this.roomService.messages;
     });
