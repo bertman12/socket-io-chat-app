@@ -7,9 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatRoomComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(){}
+  
   ngOnInit(): void {
   }
-
 }

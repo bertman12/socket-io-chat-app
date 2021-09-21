@@ -1,0 +1,10 @@
+
+.message-list{
+    min-height: 76vh;
+    /* overflow: hidden; */
+}
+
+/* .list li > .message-container:nth-child(even){
+    background-color: red!important;
+    border: black 100px red;
+} */

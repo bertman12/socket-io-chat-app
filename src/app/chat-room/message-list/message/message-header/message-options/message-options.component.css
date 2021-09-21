@@ -1,0 +1,7 @@
+.options-wrapper{
+    cursor: pointer;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}

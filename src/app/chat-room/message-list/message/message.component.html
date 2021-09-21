@@ -1,1 +1,12 @@
-<p>message works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div *ngIf="!(messageEditId === currentMessage.id)" class="col-12 message-container">
+            <app-message-header [currentMessage]="currentMessage"></app-message-header>
+            <p>{{ (currentMessage.content + ' ====== for Server: ' +  (currentMessage.serverId + 1) + ' Room: ' + (currentMessage.roomId + 1)) }}</p>
+        </div>
+        <div *ngIf="messageEditId === currentMessage.id" class="col-12 message-container">
+            <app-message-header [currentMessage]="currentMessage"></app-message-header>
+            <app-message-input [editor]='{isEditing: true, message: currentMessage}'></app-message-input>
+        </div>
+    </div>
+</div>

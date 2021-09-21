@@ -1,0 +1,14 @@
+<div class="btn-group col-12" *ngIf='editor.isEditing === false'>
+    <input class="btn btn-light message-input" type="text" placeholder="Say something..." [(ngModel)]="messageInput" (keydown)="onMessageEntered($event)" #input>
+    <div>
+        <button class="btn btn-primary" (click)="onMessageEntered()">Submit</button>
+    </div>
+</div>
+<div class="btn-group col-12"  *ngIf='editor.isEditing'>
+    <input *ngIf='editor.isEditing === true' class="btn btn-light message-input" type="text" placeholder="Say something..." [value]='editedMessageContent' [(ngModel)]="editedMessageContent" (keydown)="onMessageEntered($event)" #input>
+    <div>
+        <button class="btn btn-primary" (click)="onMessageEntered()">Submit</button>
+    </div>
+</div>
+
+

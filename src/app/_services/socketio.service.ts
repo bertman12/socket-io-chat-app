@@ -1,21 +1,28 @@
 import { Injectable } from '@angular/core';
-import { io, Socket } from 'socket.io-client'
+import { io, Socket } from 'socket.io-client';
+import { API_URL } from 'src/environments/environment';
+import { Message } from '../_models/message';
+import { MessageService } from './message.service';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class SocketioService {
+  
   socket!: Socket;
-  constructor() {
-  }
+
+  constructor() {}
+
+  // set emit(event: {eventName: string, data: any}){
+  //   this.socket.emit(event.eventName, event.data);
+  // }
 
   establishConnection(){
-    this.socket = io("http://localhost:3000");
+    this.socket = io(API_URL);
     console.log('Creating connection');
-    console.log('Socket id:', this.socket.id);
-    console.log(this.socket.id);
-  
+    // console.log('Socket id:', this.socket.id);
+    // console.log(this.socket.id);
   }
 
   pingServer(){
@@ -23,21 +30,18 @@ export class SocketioService {
     this.socket.emit('myEvent', msg);
   }
 
-  joinRoom(){
-
+  
+  emit(eventName: string, data:any){
+    this.socket.emit(eventName, data);
+    // this.socket.on(eventName,(data) => {
+    //   console.log('this is the event data', data);
+    // });
+    
   }
 
-  leaveRoom(){
+  
 
-  }
 
-  joinServer(){
-
-  }
-
-  leaveServer(){
-
-  }
 }
 
 

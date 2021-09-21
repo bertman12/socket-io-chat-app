@@ -1,1 +1,7 @@
-<p>message-list works!</p>
+<div class="container-fluid message-list">
+    <div class="row">
+        <div class="col">
+            <app-message *ngFor="let message of localMessages" [currentMessage]="message"></app-message>
+        </div>
+    </div>
+</div>
