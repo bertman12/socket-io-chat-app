@@ -19,7 +19,7 @@ export class SocketioService {
     'left-room',
     'joined-server',
     'left-server',
-  ]
+  ];
   // set emit(event: {eventName: string, data: any}){
   //   this.socket.emit(event.eventName, event.data);
   // }
@@ -36,27 +36,24 @@ export class SocketioService {
     for(let eventName of this.events){
       this.socket.on(eventName,(dataObj)=> {
         
-      })
+      });
     }
   }
 
   initialize(){
     this.establishConnection();
     this.pingServer();
-    this.buildEventListeners();
+    // this.buildEventListeners();
   }
 
   pingServer(){
-    const msg:string = "Pinging server now!"
+    const msg:string = "Pinging server now!";
     this.socket.emit('myEvent', msg);
   }
 
   
   emit(eventName: string, data:any){
     this.socket.emit(eventName, data);
-    // this.socket.on(eventName,(data) => {
-    //   console.log('this is the event data', data);
-    // });
     
   }
 

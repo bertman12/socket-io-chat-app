@@ -12,7 +12,7 @@ export class MessageComponent implements OnInit {
   constructor(private messageService: MessageService) { }
   @Input() currentMessage: Message = {id:0 ,userId: 0, serverId: 0, roomId: 0, content: 'MESSAGE NOT RECEIVED'};
 
-  messageEditId: number = -5;
+  messageEditId: number = -1;
   
   ngOnInit(): void {
     this.messageService.messageEditId$.subscribe((messageId: number) => {

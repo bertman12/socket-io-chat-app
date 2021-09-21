@@ -13,43 +13,33 @@ export class MessageService {
 
   messageListChanged$: Subject<Message[] | Message> = new Subject();
   messageEditId$: Subject<number> = new Subject();
-  private DEFAULT_EDIT_ID:number = -1;
+  private DISABLE_EDITING_ID:number = -1;
   
   messages: Message[] = [
     {id:0 ,userId: 0, serverId: 0, roomId: 0, content: 'Im the message content'},
-    {id:0 ,userId: 0, serverId: 1, roomId: 0, content: 'Im the message content'},
-    {id:0 ,userId: 0, serverId: 2, roomId: 0, content: 'Im the message content'},
-    {id:0 ,userId: 0, serverId: 2, roomId: 1, content: 'Im the message content'},
+    {id:1 ,userId: 0, serverId: 1, roomId: 0, content: 'Im the message content'},
+    {id:2 ,userId: 0, serverId: 2, roomId: 0, content: 'Im the message content'},
+    {id:3 ,userId: 0, serverId: 2, roomId: 1, content: 'Im the message content'},
   ];
   
   // a client wont start listening for the chat-message event until it runs createMessage(), so we should start listening to events on app startup.
-  createMessage(serverId: number, roomId: number, messageId:number, message: string){
-    //first emit the data to clients
-    this.socketioService.emit('chat-message', message);
-    //then the clients will listen for the event and add it to their message array
-    this.socketioService.socket.on('chat-message', (data:string) => {
-      console.log('inside the message service...', data);
-      const date = new Date();
-      const messageTime:string = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}, ${date.getHours()}:${date.getMinutes()}`;
-      const TEMP_USER_ID: number = 0;
-      const NEW_MESSAGE = {id: messageId, userId: TEMP_USER_ID, serverId: serverId, roomId: roomId, content: data, time: messageTime};
-      console.log('the new message is...', NEW_MESSAGE);
-      this.messages.push(NEW_MESSAGE);
-      this.messageListChanged$.next(NEW_MESSAGE);
-    });
-    // const date = new Date();
-    // const messageTime:string = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}, ${date.getHours()}:${date.getMinutes()}`;
-    // const TEMP_USER_ID: number = 0;
-    // const NEW_MESSAGE = {id: messageId, userId: TEMP_USER_ID, serverId: serverId, roomId: roomId, content: message, time: messageTime};
-    // this.messages.push(NEW_MESSAGE);
-    // this.messageListChanged$.next(NEW_MESSAGE);
 
-    // this.socketioService.emit('chat-message', message);
-    // this.socketioService.emitMessage(message);
+  generateMessageTime(){
+    const date = new Date();
+    const messageTime:string = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}, ${date.getHours()}:${date.getMinutes()}`;
+    return messageTime;
   }
 
-  getMessage(){
+  emitNewMessage(newMessage: Message){
+      const TEMP_USER_ID: number = 0; //when user service is ready, use the specific user's id
+      newMessage.time = this.generateMessageTime();
+      newMessage.userId = TEMP_USER_ID;
+      this.socketioService.emit('chat-message', newMessage);
+  }
 
+  createNewMessage(message: Message){
+      this.messages.push(message);
+      this.messageListChanged$.next(message);
   }
 
   getRoomMessages(serverId:number, roomId: number){
@@ -62,28 +52,39 @@ export class MessageService {
     return arr;
   }
 
-  onEditMessage(messageId: number){
+  toggleEditing(messageId: number){
     if(messageId >= 0){
       this.messageEditId$.next(messageId);
     }
   }
 
+  emitEditedMessage(messageSelected: Message){
+    this.socketioService.emit('chat-message-edited', messageSelected);
+  }
+
   editMessage(messageSelected: Message){
     this.messages.forEach(
-      (msg) =>{
-        if(messageSelected === msg){
+      (msg:Message) =>{
+        if(messageSelected.id === msg.id){
           msg.content = messageSelected.content;
-          this.messageEditId$.next(this.DEFAULT_EDIT_ID);
+          this.messageEditId$.next(this.DISABLE_EDITING_ID);
           this.messageListChanged$.next();
         }
     });
   }
 
+
+  emitDeletedMessage(messageSelected: Message){
+    this.socketioService.emit('chat-message-deleted', messageSelected);
+  }
+
   deleteMessage(messageSelected: Message){
+    console.log('reached delete message function. the id is', messageSelected.id);
     if(messageSelected.id >= 0){
       this.messages.forEach(
         (msg, index) =>{
-          if(messageSelected === msg){
+          if(messageSelected.id === msg.id){
+            console.log('the message in our array', msg, ' and the message to be deleted', messageSelected);
             this.messages.splice(index, 1);
             this.messageListChanged$.next();
           }

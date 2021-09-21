@@ -17,11 +17,11 @@ export class MessageOptionsComponent implements OnInit {
   }
 
   onEditMessage(){
-    this.messageService.onEditMessage(this.currentMessage.id);
+    this.messageService.toggleEditing(this.currentMessage.id);
   }
 
   onDeleteMessage(){
-    this.messageService.deleteMessage(this.currentMessage);
+    this.messageService.emitDeletedMessage(this.currentMessage);
   }
 
 }
