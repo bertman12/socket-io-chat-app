@@ -61,10 +61,8 @@ export class RoomService {
         // console.log('joined room sucessfully', 'The function caller is ', caller);
         return
       }
-      else {
-        // console.log('room didn\'t exist', 'The function caller is ', caller);
-      }
     }
+    // console.log('room didn\'t exist', 'The function caller is ', caller);
   }
 
   leaveRoom(){
