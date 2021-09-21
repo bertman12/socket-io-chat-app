@@ -13,7 +13,13 @@ export class SocketioService {
   socket!: Socket;
 
   constructor() {}
-
+  events: string[] = [
+    'chat-message',
+    'joined-room',
+    'left-room',
+    'joined-server',
+    'left-server',
+  ]
   // set emit(event: {eventName: string, data: any}){
   //   this.socket.emit(event.eventName, event.data);
   // }
@@ -23,6 +29,21 @@ export class SocketioService {
     console.log('Creating connection');
     // console.log('Socket id:', this.socket.id);
     // console.log(this.socket.id);
+  }
+
+  //setup listener for all events then use the appropriate service to handle the event
+  buildEventListeners(){
+    for(let eventName of this.events){
+      this.socket.on(eventName,(dataObj)=> {
+        
+      })
+    }
+  }
+
+  initialize(){
+    this.establishConnection();
+    this.pingServer();
+    this.buildEventListeners();
   }
 
   pingServer(){
