@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Message } from '../_models/message';
+import { RestService } from './rest.service';
 import { SocketioService } from './socketio.service';
 
 @Injectable({
@@ -9,7 +10,7 @@ import { SocketioService } from './socketio.service';
 
 export class MessageService {
 
-  constructor(private socketioService:SocketioService) {}
+  constructor(private socketioService:SocketioService, private restService: RestService) {}
 
   messageListChanged$: Subject<Message[] | Message> = new Subject();
   messageEditId$: Subject<number> = new Subject();
@@ -23,6 +24,13 @@ export class MessageService {
   ];
   
   // a client wont start listening for the chat-message event until it runs createMessage(), so we should start listening to events on app startup.
+  getAllMessages(){
+    this.restService.get('').then((data)=> {
+      this.messages = data;
+      this.messageListChanged$.next();
+    });
+  }
+
 
   generateMessageTime(){
     const date = new Date();
@@ -34,10 +42,15 @@ export class MessageService {
       const TEMP_USER_ID: number = 0; //when user service is ready, use the specific user's id
       newMessage.time = this.generateMessageTime();
       newMessage.userId = TEMP_USER_ID;
+      console.log('message emitted');
+
       this.socketioService.emit('chat-message', newMessage);
+      //will this be valid?
+      // this.socketioService.emit( JSON.stringify({events: ['chat-message', 'init-db'], data:newMessage}) , newMessage);
   }
 
   createNewMessage(message: Message){
+      console.log('createing new message');
       this.messages.push(message);
       this.messageListChanged$.next(message);
   }
@@ -58,6 +71,11 @@ export class MessageService {
     }
   }
 
+  //TODO: implement a promise where I can use socketio service to emit the event then I can await a promise from sent back from the server OR...
+  /**
+   * @param emitEditedMessage 'yeaaaaaa boiiiii'
+   * @param messageSelected 'test
+   */
   emitEditedMessage(messageSelected: Message){
     this.socketioService.emit('chat-message-edited', messageSelected);
   }

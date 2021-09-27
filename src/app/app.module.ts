@@ -25,6 +25,8 @@ import { ServerService } from './_services/server.service';
 import { MessageInputComponent } from './chat-room/message-input/message-input.component';
 import { MessageOptionsComponent } from './chat-room/message-list/message/message-header/message-options/message-options.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -50,7 +52,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule
   ],
   providers: [
     SocketioService,
