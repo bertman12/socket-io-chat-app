@@ -15,5 +15,4 @@ export class RestService {
     return data;
   }
 
-
 }

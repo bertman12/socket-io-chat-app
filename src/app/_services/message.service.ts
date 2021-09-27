@@ -42,15 +42,11 @@ export class MessageService {
       const TEMP_USER_ID: number = 0; //when user service is ready, use the specific user's id
       newMessage.time = this.generateMessageTime();
       newMessage.userId = TEMP_USER_ID;
-      console.log('message emitted');
 
       this.socketioService.emit('chat-message', newMessage);
-      //will this be valid?
-      // this.socketioService.emit( JSON.stringify({events: ['chat-message', 'init-db'], data:newMessage}) , newMessage);
   }
 
   createNewMessage(message: Message){
-      console.log('createing new message');
       this.messages.push(message);
       this.messageListChanged$.next(message);
   }
