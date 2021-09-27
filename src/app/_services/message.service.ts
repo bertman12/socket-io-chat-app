@@ -17,15 +17,15 @@ export class MessageService {
   private DISABLE_EDITING_ID:number = -1;
   
   messages: Message[] = [
-    {id:0 ,userId: 0, serverId: 0, roomId: 0, content: 'Im the message content'},
-    {id:1 ,userId: 0, serverId: 1, roomId: 0, content: 'Im the message content'},
-    {id:2 ,userId: 0, serverId: 2, roomId: 0, content: 'Im the message content'},
-    {id:3 ,userId: 0, serverId: 2, roomId: 1, content: 'Im the message content'},
+    // {id:0 ,userId: 0, serverId: 0, roomId: 0, content: 'Im the message content'},
+    // {id:1 ,userId: 0, serverId: 1, roomId: 0, content: 'Im the message content'},
+    // {id:2 ,userId: 0, serverId: 2, roomId: 0, content: 'Im the message content'},
+    // {id:3 ,userId: 0, serverId: 2, roomId: 1, content: 'Im the message content'},
   ];
   
   // a client wont start listening for the chat-message event until it runs createMessage(), so we should start listening to events on app startup.
   getAllMessages(){
-    this.restService.get('').then((data)=> {
+    this.restService.get('all').then((data)=> {
       this.messages = data;
       this.messageListChanged$.next();
     });
