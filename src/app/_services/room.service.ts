@@ -38,7 +38,7 @@ export class RoomService {
     else if(messages.length === 0){
       return [{id:-2 ,userId: 0, serverId: this.currentRoom.serverId, roomId: this.currentRoom.id, content: 'No messages for the current room.'}];
     }
-    return [{id:0 ,userId: 0, serverId: this.currentRoom.serverId, roomId: this.currentRoom.id, content: 'Unable to generate any messages from get messages.'}];
+    return [{id:-1 ,userId: 0, serverId: this.currentRoom.serverId, roomId: this.currentRoom.id, content: 'Unable to generate any messages from get messages.'}];
   }
 
   getRooms(currentServerId: number):ChatRoom[] {
@@ -58,11 +58,9 @@ export class RoomService {
         this.roomChanged$.next(this.currentRoom);
         this.messageService.getRoomMessages(this.currentRoom.id, this.currentRoom.serverId);
         this.router.navigate(['chat-room', this.currentRoom.serverId  , this.currentRoom.id ]);
-        // console.log('joined room sucessfully', 'The function caller is ', caller);
         return
       }
     }
-    // console.log('room didn\'t exist', 'The function caller is ', caller);
   }
 
   leaveRoom(){

@@ -16,12 +16,7 @@ export class MessageService {
   messageEditId$: Subject<number> = new Subject();
   private DISABLE_EDITING_ID:number = -1;
   
-  messages: Message[] = [
-    // {id:0 ,userId: 0, serverId: 0, roomId: 0, content: 'Im the message content'},
-    // {id:1 ,userId: 0, serverId: 1, roomId: 0, content: 'Im the message content'},
-    // {id:2 ,userId: 0, serverId: 2, roomId: 0, content: 'Im the message content'},
-    // {id:3 ,userId: 0, serverId: 2, roomId: 1, content: 'Im the message content'},
-  ];
+  messages: Message[] = [];
   
   // a client wont start listening for the chat-message event until it runs createMessage(), so we should start listening to events on app startup.
   getAllMessages(){
@@ -93,12 +88,10 @@ export class MessageService {
   }
 
   deleteMessage(messageSelected: Message){
-    console.log('reached delete message function. the id is', messageSelected.id);
     if(messageSelected.id >= 0){
       this.messages.forEach(
         (msg, index) =>{
           if(messageSelected.id === msg.id){
-            console.log('the message in our array', msg, ' and the message to be deleted', messageSelected);
             this.messages.splice(index, 1);
             this.messageListChanged$.next();
           }

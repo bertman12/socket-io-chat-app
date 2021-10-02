@@ -2,7 +2,6 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Message } from 'src/app/_models/message';
 import { MessageService } from 'src/app/_services/message.service';
 import { RoomService } from 'src/app/_services/room.service';
-import { SocketioService } from 'src/app/_services/socketio.service';
 
 @Component({
   selector: 'app-message-input',
@@ -24,7 +23,11 @@ export class MessageInputComponent implements OnInit {
   //The function triggers when user presses enter or uses submit button
   onMessageEntered(keyEvent?: KeyboardEvent){
     const bundleMessage = () => {
-      const NEW_MESSAGE_ID: number = this.roomService.messages.length;
+      let NEW_MESSAGE_ID: number = this.roomService.messages.length + 1
+      if(this.roomService.messages.length === 1){
+        NEW_MESSAGE_ID = 1;
+      }
+      console.log('NEW MESSAGE ID: ', NEW_MESSAGE_ID);
       let newMessage:Message = {id: NEW_MESSAGE_ID, userId: 0, serverId: this.roomService.currentRoom.serverId , roomId: this.roomService.currentRoom.id, content: this.newMessageContent };
       this.messageService.emitNewMessage(newMessage);
       this.newMessageContent = '';
