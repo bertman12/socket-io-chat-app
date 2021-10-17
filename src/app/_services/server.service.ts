@@ -9,7 +9,6 @@ import { RoomService } from './room.service';
 })
 
 export class ServerService {
-
   constructor(private roomService:RoomService) { }
 
   serverList: ChatServer[] = [
