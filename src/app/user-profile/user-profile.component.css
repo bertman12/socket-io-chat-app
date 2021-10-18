@@ -1,0 +1,35 @@
+.user-avatar{
+    border-radius: 100%;
+    background-color: white;
+    border: 5px gray ridge;
+    height: 100%;
+    width: 100%;
+}
+
+#bio{
+    resize: none;
+    border: black 2px solid;
+    /* background-color: #747474; */
+
+}
+
+.profile-body{
+    margin: 1em;
+    display: flex;
+    justify-content: center;
+}
+
+.name-wrapper{
+    display: flex;
+    height: 0%;
+}
+
+#username{
+    margin-right: 1em;
+}
+
+.bio-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
