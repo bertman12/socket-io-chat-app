@@ -14,5 +14,13 @@ export class RestService {
     console.log('The data retreived from the request: ', data);
     return data;
   }
+  
+  async post(subroute:string, inputData: any): Promise<any>{
+    const data:any = await this.http.post(`${API_URL}/${subroute}`, inputData).toPromise();
+    // console.log('The data retreived from the request: ', data);
+    return data;
+  }
+
+  
 
 }

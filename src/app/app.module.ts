@@ -26,7 +26,7 @@ import { MessageInputComponent } from './chat-room/message-input/message-input.c
 import { MessageOptionsComponent } from './chat-room/message-list/message/message-header/message-options/message-options.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -53,7 +53,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     FormsModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
     SocketioService,

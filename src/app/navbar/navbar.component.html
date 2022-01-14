@@ -3,7 +3,8 @@
       <a class="navbar-brand" routerLink="/">World Chat</a>
       <div class="d-flex">
         <!-- user profile link for small screens -->
-        <app-navbar-user class="d-lg-none"></app-navbar-user>
+        <button *ngIf="!userLoggedIn" class="btn btn-primary d-lg-none" routerLink="register">Register</button>
+        <app-navbar-user *ngIf="userLoggedIn" class="d-lg-none"></app-navbar-user>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <img src="../../assets/more-options.svg" alt="more options" width="30em">
         </button>
@@ -25,7 +26,8 @@
           </div>
         </ul>
         <!-- user profile link for larger screens -->
-        <app-navbar-user class="d-none d-lg-block"></app-navbar-user>
+        <button *ngIf="!userLoggedIn" class="btn btn-primary d-none d-lg-block" routerLink="register">Register</button>
+        <app-navbar-user *ngIf="userLoggedIn" class="d-none d-lg-block"></app-navbar-user>
       </div>
     </div>
     <!-- settings menu for large screens -->

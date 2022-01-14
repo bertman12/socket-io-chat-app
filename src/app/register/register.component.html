@@ -1,10 +1,12 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col register-body">
-            <input type="text" placeholder="Username">
-            <input type="text" placeholder="Email">
-            <input type="text" placeholder="Password">
-            <button class="btn btn-primary submit-button">Submit</button>
+        <div class="col">
+            <form class="register-body" action="" [formGroup]="registerForm" (ngSubmit)="onRegister()">
+                <input type="text" placeholder="Username" formControlName="username">
+                <input type="text" placeholder="Email" formControlName="email">
+                <input type="text" placeholder="Password" formControlName="password">
+                <button class="btn btn-primary submit-button" type="submit" >Submit</button>
+            </form>
         </div>
     </div>
 </div>
